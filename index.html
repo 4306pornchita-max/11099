@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Shopper Arena | เกมนักช้อปฉลาด</title>
+<style>
+:root{--bg:#170f16;--panel:#29171e;--panel2:#351b23;--wine:#54252d;--coral:#ff716e;--peach:#ffb29a;--gold:#ffd36e;--mint:#8ce2bf;--text:#fff3ef;--muted:#c9aeb2;--line:#69404a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 55% 0%,#4a2029 0,#21131b 48%,#130d14 100%);font-family:Tahoma,"Noto Sans Thai",sans-serif;color:var(--text);line-height:1.55}
+button,input{font:inherit}button{border:0;cursor:pointer;font-weight:700;border-radius:12px;padding:10px 15px;background:var(--coral);color:#29151b;transition:.2s}button:hover{transform:translateY(-1px);filter:brightness(1.07)}button.secondary{background:#4b2a34;color:var(--text);border:1px solid var(--line)}button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+.layout{max-width:1450px;margin:auto;display:grid;grid-template-columns:78px minmax(0,1fr);min-height:100vh}.sidebar{background:#1d1118;border-right:1px solid #44242c;padding:20px 12px;display:flex;align-items:center;flex-direction:column;gap:17px;position:sticky;top:0;height:100vh}.logo{width:44px;height:44px;border-radius:15px;background:linear-gradient(135deg,var(--coral),var(--gold));color:#351720;font-size:22px;display:grid;place-items:center;font-weight:900;margin-bottom:20px}.nav{width:46px;height:46px;display:grid;place-items:center;border-radius:14px;color:#d7bfc1;background:transparent;font-size:21px;border:1px solid transparent}.nav.active,.nav:hover{background:#4a252e;color:var(--gold);border-color:#6b3943}.nav.bottom{margin-top:auto}
+main{padding:26px clamp(15px,3vw,40px) 42px;max-width:1380px;width:100%;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px}.eyebrow{font-size:.78rem;letter-spacing:.12em;color:var(--peach);text-transform:uppercase}.topbar h1{font-size:clamp(1.45rem,3vw,2.2rem);margin:3px 0}.user{display:flex;gap:10px;align-items:center;background:#2c1920;border:1px solid var(--line);border-radius:16px;padding:8px 13px}.avatar{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,#ffc56f,#f77679);display:grid;place-items:center;font-size:22px}
+.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}.hero{position:relative;overflow:hidden;background:linear-gradient(115deg,#a43f43 0%,#773039 46%,#47222d 100%);min-height:265px;border-radius:24px;padding:28px;display:flex;align-items:center;border:1px solid #b45358}.hero:after{content:"🦊";font-size:clamp(7rem,17vw,13rem);position:absolute;right:5%;bottom:-15px;filter:drop-shadow(0 15px 15px #230e1c66);transform:rotate(-7deg)}.hero-copy{position:relative;z-index:1;max-width:58%}.chip{display:inline-block;background:#ffe6a4;color:#512a2a;padding:5px 12px;border-radius:99px;font-size:.82rem;font-weight:bold}.hero h2{font-size:clamp(1.7rem,3.8vw,3rem);line-height:1.15;margin:15px 0 10px}.hero p{color:#ffe4df;margin:0 0 18px}.hero .cta{background:#ffe3a1}
+.panel{background:linear-gradient(145deg,#301b23,#24151d);border:1px solid var(--line);border-radius:22px;padding:20px;min-width:0;box-shadow:0 16px 35px #09070b20}.panel h3{margin:0 0 12px;font-size:1.08rem}.muted{color:var(--muted);font-size:.9rem}.top-games{display:flex;flex-direction:column;gap:10px}.game-row{display:flex;align-items:center;gap:12px;background:#43232c;padding:11px;border-radius:15px;border:1px solid #5b303a}.game-icon{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:25px;background:linear-gradient(135deg,#fa8c78,#f9ca77);flex-shrink:0}.game-row strong{display:block}.game-row small{color:#d9b9bd}.game-row .arrow{margin-left:auto;color:var(--gold);font-size:20px}
+.section-head{scroll-margin-top:16px;display:flex;align-items:end;justify-content:space-between;gap:12px;margin:25px 0 12px}.section-head h2{font-size:1.35rem;margin:0}.section-head span{font-size:.85rem;color:var(--muted)}
+.stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-top:17px}.stat{background:#2b1921;border:1px solid var(--line);border-radius:17px;padding:15px}.stat .sym{font-size:1.5rem}.stat .num{font-size:1.5rem;font-weight:800;color:var(--gold);display:block}.stat .label{font-size:.82rem;color:var(--muted)}
+.content-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}.activity{position:relative;overflow:hidden;min-height:190px;background:linear-gradient(145deg,#40232d,#291821);border:1px solid var(--line);border-radius:20px;padding:18px}.activity .bigemoji{font-size:2.5rem;display:block;margin-bottom:8px}.activity p{color:var(--muted);font-size:.9rem}.activity button{margin-top:5px}.activity.feature{background:linear-gradient(135deg,#71313a,#3d202a)}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px}.control{background:#21151c;border:1px solid #56303a;border-radius:15px;padding:13px}.control label{display:flex;justify-content:space-between;gap:8px;font-weight:700;font-size:.92rem}.control output{color:var(--gold)}input[type=range]{width:100%;accent-color:var(--coral);margin:12px 0 3px}
+.resultline{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}.resultbox{flex:1;min-width:125px;background:#21151c;border:1px solid #56303a;border-radius:14px;padding:14px}.resultbox .value{font-size:1.55rem;font-weight:800;color:var(--mint)}.bar{height:10px;background:#51313b;border-radius:99px;overflow:hidden;margin-top:10px}.bar span{height:100%;display:block;width:0;background:linear-gradient(90deg,var(--coral),var(--gold),var(--mint));transition:width .2s}
+.chart{height:200px;display:flex;align-items:stretch;gap:18px;padding:8px 12px 0;border-bottom:1px solid #79505a;margin-top:15px}.chart-col{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:5px}.chart-plot{flex:1;min-height:0;width:100%;display:flex;align-items:flex-end;justify-content:center}.chart-bar{width:min(65px,75%);height:0;border-radius:9px 9px 0 0;background:linear-gradient(var(--gold),var(--coral));transition:height .25s}.chart-label,.chart-value{font-size:.8rem;color:var(--muted)}.chart-value{color:var(--text);font-weight:bold}
+.quiz-question{background:#21151c;border:1px solid #56303a;padding:14px;border-radius:15px;margin:12px 0}.choice{display:block;border:1px solid #56303a;background:#2c1b23;border-radius:11px;padding:9px 11px;margin:8px 0;cursor:pointer}.choice:has(input:checked){border-color:var(--gold);background:#49303a}.feedback{font-weight:bold;margin-top:9px}.good{color:var(--mint)}.bad{color:var(--peach)}
+.game-banner{display:flex;gap:16px;align-items:center;background:linear-gradient(100deg,#4b2631,#2d1a24);border:1px solid #6a3944;border-radius:18px;padding:17px}.game-banner .mascot{font-size:3.3rem}.game-banner p{margin:3px 0;color:var(--muted)}
+.coinpill{display:flex;align-items:center;gap:6px;background:#3b2420;border:1px solid #8a5a3a;color:var(--gold);border-radius:99px;padding:6px 14px;font-weight:800;white-space:nowrap}.topright{display:flex;gap:10px;align-items:center}input:disabled+*,.choice:has(input:disabled){opacity:.75;cursor:default}button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.rowq{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#21151c;border:1px solid #56303a;border-radius:12px;padding:10px 12px;margin:8px 0}select{font:inherit;background:#2c1b23;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:6px 8px;max-width:100%}.panel+.panel{margin-top:16px}
+footer{text-align:center;color:#9d7f86;font-size:.82rem;padding:25px 0 0}
+@media(max-width:980px){.grid{grid-template-columns:1fr}.content-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero:after{right:2%}}
+@media(max-width:600px){.layout{grid-template-columns:55px minmax(0,1fr)}.sidebar{padding:13px 4px;gap:10px}.nav{width:40px;height:40px}.logo{width:39px;height:39px}.topbar{flex-direction:column;align-items:flex-start}.topbar h1{word-break:keep-all;overflow-wrap:anywhere}.user .userlabel{display:none}.hero{padding:21px;min-height:250px}.hero-copy{max-width:70%}.hero:after{font-size:7rem;right:-8%;opacity:.85}.content-grid,.controls{grid-template-columns:1fr}.stat-grid{gap:8px}.stat{padding:11px}.stat .num{font-size:1.25rem}.panel{padding:15px}.section-head{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" aria-label="เมนูหลัก">
+ <div class="logo">S</div>
+ <a class="nav active" href="#home" title="หน้าหลัก" aria-label="หน้าหลัก">⌂</a>
+ <a class="nav" href="#learn" title="โหมดการเล่น" aria-label="โหมดการเล่น">▤</a>
+ <a class="nav" href="#budget" title="Budget Master" aria-label="Budget Master">◉</a>
+ <a class="nav" href="#value" title="Value Hunter" aria-label="Value Hunter">♢</a>
+ <a class="nav" href="#produce" title="Production Line" aria-label="Production Line">⚒</a>
+ <a class="nav" href="#quiz" title="แบบทดสอบ" aria-label="แบบทดสอบ">✦</a>
+ <a class="nav bottom" href="#summary" title="ภารกิจสุดท้าย / สรุป" aria-label="ภารกิจสุดท้าย / สรุป">★</a>
+</aside>
+<main id="home">
+ <div class="topbar"><div><div class="eyebrow">LEARNING ARCADE • SOCIAL STUDIES M.2</div><h1>สวัสดี นักช้อปมือโปร! 👋</h1><div class="muted">พร้อมลุยภารกิจวันนี้หรือยัง? เรียนรู้ให้สนุก คิดให้คุ้มก่อนจ่าย</div></div><div class="topright"><div class="coinpill" aria-live="polite" title="เหรียญสะสม">🪙 <span id="coins">0</span></div><div class="user"><div class="avatar">🦊</div><div class="userlabel"><b>น้องคุ้มค่า</b><div class="muted">ผู้พิทักษ์เงินออม</div></div></div></div></div>
+
+ <div class="grid">
+  <section class="hero"><div class="hero-copy"><span class="chip">⭐ ภารกิจแนะนำ</span><h2>SMART<br>SHOPPER ARENA</h2><p>ฝึกคิด วางแผนเงิน และเลือกสินค้าให้คุ้มค่าในชีวิตจริง</p><button class="cta" onclick="document.querySelector('#budget').scrollIntoView({behavior:'smooth'})">เริ่มภารกิจ →</button></div></section>
+  <section class="panel"><h3>🎮 ภารกิจยอดนิยม</h3><div class="top-games">
+   <a class="game-row" href="#budget" style="color:inherit;text-decoration:none"><div class="game-icon">💸</div><div><strong>Budget Master</strong><small>จัดงบรายวันให้เหลือเงินออม</small></div><span class="arrow">›</span></a>
+   <a class="game-row" href="#value" style="color:inherit;text-decoration:none"><div class="game-icon">🧴</div><div><strong>Value Hunter</strong><small>ตามหาของที่คุ้มค่าที่สุด</small></div><span class="arrow">›</span></a>
+   <a class="game-row" href="#quiz" style="color:inherit;text-decoration:none"><div class="game-icon">🏆</div><div><strong>Quiz Challenge</strong><small>ตอบคำถามสะสมคะแนน</small></div><span class="arrow">›</span></a>
+  </div></section>
+ </div>
+
+ <div class="stat-grid">
+  <div class="stat"><div class="sym">🪙</div><span class="num" id="statSpend">130 ฿</span><span class="label">รายจ่ายต่อวัน</span></div>
+  <div class="stat"><div class="sym">💰</div><span class="num" id="statSave">20 ฿</span><span class="label">เงินเหลือจากงบ</span></div>
+  <div class="stat"><div class="sym">📊</div><span class="num" id="statWeek">650 ฿</span><span class="label">รายจ่าย 5 วัน</span></div>
+  <div class="stat"><div class="sym">⭐</div><span class="num" id="statScore">– / 3</span><span class="label">คะแนนแบบทดสอบ</span></div>
+ </div>
+
+ <div class="section-head" id="learn"><h2>🕹️ เลือกโหมดการเล่น</h2><span>เรียนรู้ผ่านการลงมือทำ</span></div>
+ <div class="content-grid">
+  <article class="activity feature"><span class="bigemoji">💸</span><h3>Budget Master</h3><p>ปรับค่าใช้จ่ายแล้วดูกราฟงบประมาณเปลี่ยนทันที</p><button onclick="document.querySelector('#budget').scrollIntoView({behavior:'smooth'})">เล่นโหมดนี้ ↗</button></article>
+  <article class="activity"><span class="bigemoji">🧴</span><h3>Value Hunter</h3><p>เปรียบเทียบต้นทุนต่อครั้ง ไม่ดูแค่ราคาป้าย</p><button class="secondary" onclick="document.querySelector('#value').scrollIntoView({behavior:'smooth'})">เริ่มเปรียบเทียบ ↗</button></article>
+  <article class="activity"><span class="bigemoji">🧠</span><h3>Knowledge Quest</h3><p>ท้าทายความรู้ 3 ข้อ พร้อมเฉลยและคะแนน</p><button class="secondary" onclick="document.querySelector('#quiz').scrollIntoView({behavior:'smooth'})">ทดสอบความรู้ ↗</button></article>
+ </div>
+
+ <div class="section-head" id="budget"><h2>💸 Budget Master — ห้องควบคุมงบประมาณ</h2><span>เลื่อนแถบเพื่อปรับตัวเลขแบบเรียลไทม์</span></div>
+ <section class="panel">
+  <p class="muted">สมมติมีงบ 150 บาทต่อวัน ลองจัดสรรรายจ่ายให้เหมาะสม</p>
+  <div class="controls">
+   <div class="control"><label for="food"><span>🍛 ค่าอาหาร</span><span><output id="foodOut">60</output> ฿</span></label><input id="food" type="range" min="20" max="100" step="5" value="60"></div>
+   <div class="control"><label for="travel"><span>🚌 ค่าเดินทาง</span><span><output id="travelOut">30</output> ฿</span></label><input id="travel" type="range" min="0" max="60" step="5" value="30"></div>
+   <div class="control"><label for="snack"><span>🧋 ขนม/เครื่องดื่ม</span><span><output id="snackOut">25</output> ฿</span></label><input id="snack" type="range" min="0" max="60" step="5" value="25"></div>
+   <div class="control"><label for="other"><span>📚 ค่าใช้จ่ายอื่น</span><span><output id="otherOut">15</output> ฿</span></label><input id="other" type="range" min="0" max="40" step="5" value="15"></div>
+  </div>
+  <div class="resultline"><div class="resultbox"><div class="muted">รายจ่ายรวมวันนี้</div><div class="value" id="total">130 ฿</div><div class="bar"><span id="budgetBar"></span></div><div id="budgetText" class="muted">เหลือในงบ 20 บาท</div></div><div class="resultbox"><div class="muted">ประมาณการ 5 วันเรียน</div><div class="value" id="week">650 ฿</div><div class="muted">รายจ่ายต่อวัน × 5</div><div id="tip" class="muted">💡 ลองเพิ่มเงินออม</div></div></div>
+  <div class="chart" role="img" aria-label="กราฟเปรียบเทียบรายจ่ายกับงบ 150 บาท"><div class="chart-col"><div class="chart-value" id="chartSpent">130</div><div class="chart-plot"><div class="chart-bar" id="spentBar"></div></div><div class="chart-label">รายจ่าย</div></div><div class="chart-col"><div class="chart-value">150</div><div class="chart-plot"><div class="chart-bar" id="budgetRef" style="background:linear-gradient(#8ce2bf,#438f85)"></div></div><div class="chart-label">งบที่มี</div></div></div>
+ </section>
+
+ <section class="panel" id="missionPanel"><h3>🎯 ภารกิจงบประมาณ: จัดให้ผ่านทุกเงื่อนไข</h3><div id="missionList" class="muted" style="line-height:1.9"></div><button id="missionBtn" type="button" style="margin-top:10px">ส่งแผนงบ & รับ 15 🪙</button> <span id="missionRes" class="feedback" aria-live="polite"></span></section>
+
+ <div class="section-head" id="value"><h2>🧴 Value Hunter — ล่าของคุ้มค่า</h2><span>ราคาซื้อ ÷ จำนวนครั้งที่ใช้ = ต้นทุนต่อครั้ง</span></div>
+ <section class="panel">
+  <div class="controls">
+   <div class="control"><label for="priceA"><span>🧴 ขวด A • ราคา</span><span><output id="priceAOut">60</output> ฿</span></label><input id="priceA" type="range" min="20" max="200" step="10" value="60"><label for="useA"><span>ใช้ได้</span><span><output id="useAOut">30</output> ครั้ง</span></label><input id="useA" type="range" min="5" max="100" step="5" value="30"><div class="muted">ต้นทุนต่อครั้ง</div><div class="value" id="costA" style="font-size:1.5rem;color:var(--gold);font-weight:bold">2.00 ฿</div></div>
+   <div class="control"><label for="priceB"><span>🧴 ขวด B • ราคา</span><span><output id="priceBOut">100</output> ฿</span></label><input id="priceB" type="range" min="20" max="200" step="10" value="100"><label for="useB"><span>ใช้ได้</span><span><output id="useBOut">80</output> ครั้ง</span></label><input id="useB" type="range" min="5" max="100" step="5" value="80"><div class="muted">ต้นทุนต่อครั้ง</div><div class="value" id="costB" style="font-size:1.5rem;color:var(--mint);font-weight:bold">1.25 ฿</div></div>
+  </div>
+  <div class="resultbox" style="margin-top:13px"><b id="winner">🌟 ขวด B คุ้มค่ากว่าเมื่อคิดต้นทุนต่อครั้ง</b><p id="reason" class="muted">แม้ราคาซื้อสูงกว่า แต่ใช้ได้หลายครั้งกว่า</p><div class="bar" title="แถบแสดงเปอร์เซ็นต์ที่ประหยัดได้"><span id="valueBar"></span></div><div class="muted">แถบ = % ต้นทุนต่อครั้งที่ประหยัดได้ • อย่าลืมดูคุณภาพ ความปลอดภัย และความทนทานด้วย</div></div>
+ </section>
+
+ <section class="panel" id="vc"><h3>🎯 โจทย์ท้าทาย: เดาก่อนคำนวณ</h3><p id="vcQ"></p><div id="vcBtns"></div><div id="vcRes" class="feedback" aria-live="polite"></div></section>
+
+ <div class="section-head" id="produce"><h2>🏭 Production Line — สายการผลิต</h2><span>สินค้า vs บริการ • ปัจจัยการผลิต</span></div>
+ <section class="panel"><h3>ด่าน 1: แยกสินค้าและบริการ (+15 🪙)</h3><div id="sortList"></div><button id="sortCheck" type="button">ตรวจคำตอบ</button> <span id="sortRes" class="feedback" aria-live="polite"></span>
+  <h3 style="margin-top:22px">ด่าน 2: ปัจจัยการผลิตของร้านขนมปัง (+15 🪙)</h3><p class="muted">แต่ละข้อเป็นปัจจัยการผลิตชนิดใด?</p><div id="facList"></div><button id="facCheck" type="button">ตรวจคำตอบ</button> <span id="facRes" class="feedback" aria-live="polite"></span></section>
+
+ <div class="section-head" id="quiz"><h2>🧠 Knowledge Quest — ห้องท้าทายความรู้</h2><span>ตอบถูกข้อละ +5 🪙 • กดดูเฉลยแล้วจะหยุดรับเหรียญ</span></div>
+ <section class="panel"><p class="muted">เลือกคำตอบแล้วกดตรวจคำตอบเพื่อดูคะแนนและเฉลย</p>
+ <form id="quizForm">
+  <div class="quiz-question"><b>01 / 03</b><p>ค่าอาหาร 45 บาท ค่าเดินทาง 25 บาท และเครื่องเขียน 20 บาท รวมเท่าไร?</p><label class="choice"><input type="radio" name="q1" value="a"> 80 บาท</label><label class="choice"><input type="radio" name="q1" value="b"> 90 บาท</label><label class="choice"><input type="radio" name="q1" value="c"> 100 บาท</label><div class="feedback" id="f1"></div></div>
+  <div class="quiz-question"><b>02 / 03</b><p>A ราคา 90 บาท ใช้ 30 ครั้ง ส่วน B ราคา 120 บาท ใช้ 60 ครั้ง ข้อใดมีต้นทุนต่อครั้งต่ำกว่า?</p><label class="choice"><input type="radio" name="q2" value="a"> A เพราะราคาซื้อถูกกว่า</label><label class="choice"><input type="radio" name="q2" value="b"> B เพราะต้นทุนต่อครั้ง 2 บาท</label><label class="choice"><input type="radio" name="q2" value="c"> เท่ากัน</label><div class="feedback" id="f2"></div></div>
+  <div class="quiz-question"><b>03 / 03</b><p>ข้อใดเป็นตัวอย่างของบริการ?</p><label class="choice"><input type="radio" name="q3" value="a"> สมุดโน้ต</label><label class="choice"><input type="radio" name="q3" value="b"> ขนมปัง</label><label class="choice"><input type="radio" name="q3" value="c"> การซ่อมจักรยาน</label><div class="feedback" id="f3"></div></div>
+  <button type="submit" id="quizSubmit">ตรวจคำตอบ ✦</button> <button type="button" class="secondary" id="answers">ดูเฉลย</button> <span id="score" class="feedback" aria-live="polite"></span>
+ </form></section>
+
+ <div class="section-head" id="summary"><h2>🏆 Final Boss — ภารกิจนักช้อปฉลาด</h2><span>รอบสุดท้ายเพื่อสรุปบทเรียน</span></div>
+ <section class="panel"><div class="game-banner"><div class="mascot">🦊</div><div><h3>ภารกิจ: เลือกสมุดให้คุ้มที่สุด</h3><p>มีงบ 100 บาท ต้องใช้สมุดจดให้ครบ 60 วันเรียน เลือกแผนที่คิดว่าคุ้มที่สุด</p></div></div>
+  <label class="choice"><input type="radio" name="game" value="a"> แผน A: สมุดเล่มละ 25 บาท ใช้ได้เล่มละ 20 วัน กระดาษขาดง่าย (ต้องซื้อต่อเนื่อง)</label>
+  <label class="choice"><input type="radio" name="game" value="b"> แผน B: สมุดเล่มละ 40 บาท ใช้ได้ 60 วัน กระดาษทนกว่า</label>
+  <label class="choice"><input type="radio" name="game" value="c"> แผน C: ซื้อสมุดแบบเดียวกับแผน A จำนวน 4 เล่มทันที (100 บาท) เพราะมีเงิน 100 บาท</label>
+  <button id="playGame" type="button">ส่งคำตอบ & รับ 20 เหรียญ 🪙</button><div id="gameResult" class="feedback" aria-live="polite"></div>
+  <div class="section-head"><h2>📌 สรุปสิ่งที่ได้เรียนรู้</h2></div><div class="content-grid">
+   <div class="activity"><span class="bigemoji">🏭</span><h3>การผลิต</h3><p>ใช้ทรัพยากร เช่น วัตถุดิบ แรงงาน เงินทุน และความรู้ เพื่อสร้างสินค้าและบริการ</p></div>
+   <div class="activity"><span class="bigemoji">🧮</span><h3>คำนวณรายจ่าย</h3><p>นำค่าใช้จ่ายแต่ละรายการมาบวกกัน เพื่อรู้ยอดรวมและวางแผนงบประมาณ</p></div>
+   <div class="activity"><span class="bigemoji">💎</span><h3>ความคุ้มค่า</h3><p>ดูต้นทุนต่อครั้ง คุณภาพ ความปลอดภัย ความทนทาน และความจำเป็น ไม่ดูแค่ราคาถูก</p></div>
+  </div><button class="secondary" id="reset" style="margin-top:16px">↻ เริ่มเกมใหม่</button>
+ </section>
+ <footer>SMART SHOPPER ARENA • สื่อการเรียนรู้เรื่องการผลิตสินค้าและบริการ • ระดับชั้น ม.2</footer>
+</main></div>
+<script>
+const $=id=>document.getElementById(id), money=n=>n.toLocaleString('th-TH',{maximumFractionDigits:2});
+function updateBudget(){let ids=['food','travel','snack','other'],v=ids.map(id=>+$(id).value);ids.forEach((id,i)=>$(id+'Out').textContent=v[i]);let total=v.reduce((a,b)=>a+b,0),rem=150-total;
+$('total').textContent=money(total)+' ฿';$('week').textContent=money(total*5)+' ฿';$('budgetBar').style.width=Math.min(100,total/150*100)+'%';$('budgetText').textContent=rem>=0?'เหลือในงบ '+money(rem)+' บาท':'เกินงบ '+money(-rem)+' บาท';$('budgetText').style.color=rem>=0?'var(--mint)':'var(--peach)';$('chartSpent').textContent=money(total);let mx=Math.max(total,150);$('spentBar').style.height=(total/mx*100)+'%';$('budgetRef').style.height=(150/mx*100)+'%';$('spentBar').style.background=rem<0?'linear-gradient(#ffb29a,#e0504f)':'';$('budgetBar').style.background=rem<0?'linear-gradient(90deg,var(--peach),var(--coral))':'';$('tip').textContent=rem<0?'⚠️ เกินงบ ลองลดรายจ่ายบางรายการ':rem>=30?'💡 เยี่ยม! เหลือเงินสำหรับออมหรือเหตุฉุกเฉิน':rem===0?'💡 ใช้เงินพอดีงบ แต่ยังไม่มีเงินออมเลย':'💡 ยังอยู่ในงบ ลองเหลือออมให้ได้อย่างน้อย 30 บาท';$('statSpend').textContent=money(total)+' ฿';$('statSave').textContent=(rem>=0?money(rem):'-'+money(-rem))+' ฿';$('statWeek').textContent=money(total*5)+' ฿';}
+function updateValue(){['priceA','useA','priceB','useB'].forEach(id=>$(id+'Out').textContent=$(id).value);let a=+$('priceA').value/+$('useA').value,b=+$('priceB').value/+$('useB').value;$('costA').textContent=a.toFixed(2)+' ฿/ครั้ง';$('costB').textContent=b.toFixed(2)+' ฿/ครั้ง';if(Math.abs(a-b)<.005){$('winner').textContent='🤝 ทั้งสองตัวเลือกมีต้นทุนต่อครั้งเท่ากัน';$('reason').textContent='ลองเปรียบเทียบคุณภาพและความทนทานเพิ่มเติม'}else{let w=a<b?'A':'B';$('winner').textContent='🌟 ขวด '+w+' คุ้มค่ากว่าเมื่อคิดต้นทุนต่อครั้ง';let pct=Math.round((Math.abs(a-b)/Math.max(a,b))*100);$('reason').textContent='ต้นทุนต่อครั้งต่างกัน '+Math.abs(a-b).toFixed(2)+' บาท (ประหยัดกว่า ~'+pct+'%) อย่าลืมพิจารณาคุณภาพด้วย'}$('valueBar').style.width=(Math.abs(a-b)<.005?0:Math.round((Math.abs(a-b)/Math.max(a,b))*100))+'%';}
+['food','travel','snack','other'].forEach(id=>$(id).addEventListener('input',updateBudget));['priceA','useA','priceB','useB'].forEach(id=>$(id).addEventListener('input',updateValue));
+const ans={q1:'b',q2:'b',q3:'c'},expl={q1:'45 + 25 + 20 = 90 บาท',q2:'A = 3 บาท/ครั้ง ส่วน B = 2 บาท/ครั้ง',q3:'การซ่อมจักรยานเป็นบริการ เพราะเป็นการทำงานให้ผู้ใช้'};
+let coins=0,revealed=false;const paid=new Set();
+function addCoins(key,n){if(paid.has(key))return 0;paid.add(key);coins+=n;$('coins').textContent=coins;return n}
+function check(reveal=false){let score=0,done=0,gained=0,wasRevealed=revealed;
+Object.keys(ans).forEach((q,i)=>{let sel=document.querySelector('input[name="'+q+'"]:checked'),f=$('f'+(i+1)),ok=!!sel&&sel.value===ans[q];
+if(sel)done++;if(ok){score++;if(!wasRevealed)gained+=addCoins(q,5)}
+if(ok){f.className='feedback good';f.textContent='✅ ถูกต้อง! '+expl[q]}
+else if(reveal||wasRevealed){f.className='feedback bad';f.textContent='💡 เฉลย: '+expl[q]}
+else if(sel){f.className='feedback bad';f.textContent='❌ ยังไม่ถูก ลองคิดอีกครั้ง หรือกด "ดูเฉลย"'}
+else{f.className='feedback';f.textContent='เลือกคำตอบก่อนนะ'}});
+if(reveal){revealed=true;document.querySelectorAll('#quizForm input').forEach(x=>x.disabled=true);$('quizSubmit').disabled=true;$('answers').disabled=true}
+let g=gained?' • +'+gained+' 🪙':'';
+$('score').textContent=reveal?'เปิดเฉลยแล้ว • คะแนนของคุณ '+score+'/3 ข้อ'+g:done===3?'คะแนนของคุณ '+score+'/3 ข้อ'+g+(score===3?' 🎉':''):'ตอบแล้ว '+done+'/3 ข้อ'+g;
+$('statScore').textContent=(done===3||reveal)?score+' / 3':'– / 3';}
+$('quizForm').addEventListener('submit',e=>{e.preventDefault();check()});$('answers').addEventListener('click',()=>check(true));
+$('playGame').addEventListener('click',()=>{let c=document.querySelector('input[name="game"]:checked'),r=$('gameResult');if(!c){r.textContent='เลือกแผนก่อนนะ';r.className='feedback';return}
+if(c.value==='b'){let g=addCoins('boss',20);r.textContent='🏆 ผ่านด่าน! แผน B ใช้เล่มเดียวครบ 60 วัน ต้นทุน 40 ÷ 60 ≈ 0.67 บาท/วัน'+(g?' • +'+g+' 🪙':' (รับเหรียญด่านนี้ไปแล้ว)');r.className='feedback good'}
+else if(c.value==='a'){r.textContent='💡 ลองคิดใหม่: ต้องซื้อ 3 เล่ม = 75 บาท ต้นทุน 1.25 บาท/วัน และกระดาษขาดง่าย';r.className='feedback bad'}
+else{r.textContent='💡 ซื้อ 4 เล่ม 100 บาท แต่ใช้จริงแค่ 3 เล่ม ต้นทุน ≈ 1.67 บาท/วัน ของมากไม่ได้แปลว่าคุ้ม';r.className='feedback bad'}});
+$('reset').addEventListener('click',()=>{[['food',60],['travel',30],['snack',25],['other',15],['priceA',60],['useA',30],['priceB',100],['useB',80]].forEach(([id,v])=>$(id).value=v);document.querySelectorAll('input[type=radio]').forEach(x=>x.checked=false);['f1','f2','f3','score','gameResult'].forEach(id=>{$(id).textContent='';$(id).className='feedback'});$('statScore').textContent='– / 3';coins=0;revealed=false;paid.clear();$('coins').textContent='0';document.querySelectorAll('#quizForm input').forEach(x=>x.disabled=false);$('quizSubmit').disabled=false;$('answers').disabled=false;updateBudget();updateValue();window.scrollTo({top:0,behavior:'smooth'});});
+
+/* ---- Budget mission ---- */
+function mission(){let v=['food','travel','snack','other'].map(id=>+$(id).value),t=v.reduce((a,b)=>a+b,0),c=[[t<=150,'ไม่เกินงบ 150 บาท'],[150-t>=30,'เหลือออมอย่างน้อย 30 บาท'],[v[0]>=40,'ค่าอาหารไม่ต่ำกว่า 40 บาท (กินให้อิ่มพอ)'],[v[1]>=20,'ค่าเดินทางไม่ต่ำกว่า 20 บาท']];$('missionList').innerHTML=c.map(([o,l])=>(o?'✅ ':'⬜ ')+l).join('<br>');return c.every(x=>x[0])}
+['food','travel','snack','other'].forEach(id=>$(id).addEventListener('input',mission));
+$('missionBtn').addEventListener('click',()=>{let r=$('missionRes');if(mission()){let g=addCoins('mission',15);r.className='feedback good';r.textContent='🎉 วางแผนงบได้ดี!'+(g?' • +'+g+' 🪙':' (รับเหรียญภารกิจนี้แล้ว)')}else{r.className='feedback bad';r.textContent='ยังไม่ผ่านทุกเงื่อนไข ลองปรับสไลเดอร์ด้านบน'}});
+/* ---- Value Hunter challenge ---- */
+const vcs=[['แบตเตอรี่ AA',[40,20],[90,60]],['ยาสีฟัน',[60,40],[80,80]],['ปากกาเจล',[15,5],[35,20]],['ครีมกันแดด',[120,60],[150,50]],['น้ำยาล้างจาน',[45,30],[100,50]]];let vi=0;
+function vcShow(){const[n,a,b]=vcs[vi];$('vcQ').innerHTML='<b>'+n+'</b><br>ตัวเลือก A: '+a[0]+' บาท ใช้ได้ '+a[1]+' ครั้ง<br>ตัวเลือก B: '+b[0]+' บาท ใช้ได้ '+b[1]+' ครั้ง<br>ซื้ออันไหนคุ้มกว่า?';$('vcRes').textContent='';$('vcRes').className='feedback';$('vcBtns').innerHTML='<button type="button" data-p="A">เลือก A</button> <button type="button" data-p="B">เลือก B</button> <button type="button" class="secondary" data-p="next">โจทย์ถัดไป ↻</button>'}
+$('vcBtns').addEventListener('click',e=>{let p=e.target.dataset.p;if(!p)return;if(p==='next'){let n;do{n=Math.floor(Math.random()*vcs.length)}while(n===vi);vi=n;vcShow();return}
+const[,a,b]=vcs[vi],ca=a[0]/a[1],cb=b[0]/b[1],best=ca<cb?'A':'B',r=$('vcRes'),txt='A = '+ca.toFixed(2)+' ฿/ครั้ง, B = '+cb.toFixed(2)+' ฿/ครั้ง';
+if(p===best){let g=addCoins('vc'+vi,5);r.className='feedback good';r.textContent='✅ ถูกต้อง! '+txt+(g?' • +5 🪙':'')}else{r.className='feedback bad';r.textContent='💡 ยังไม่ใช่ — '+txt+' ลองเทียบต้นทุนต่อครั้งอีกที'}});
+/* ---- Production Line ---- */
+const sortItems=[['ขนมปัง','g'],['ตัดผม','s'],['รองเท้า','g'],['ซ่อมจักรยาน','s'],['สมุดโน้ต','g'],['ส่งพัสดุ','s']],sortOpts=[['g','สินค้า'],['s','บริการ']],
+facItems=[['พื้นที่ตั้งร้านและวัตถุดิบจากธรรมชาติ','land'],['พนักงานที่นวดแป้งและขายขนม','labor'],['เตาอบและเงินลงทุนซื้ออุปกรณ์','capital'],['เจ้าของร้านที่ตัดสินใจและรับความเสี่ยง','ent']],facOpts=[['land','ที่ดิน/ทรัพยากรธรรมชาติ'],['labor','แรงงาน'],['capital','ทุน'],['ent','ผู้ประกอบการ']];
+function buildQ(box,items,opts){$(box).innerHTML=items.map(([t])=>'<div class="rowq"><span>'+t+'</span><select aria-label="'+t+'"><option value="">— เลือก —</option>'+opts.map(([v,l])=>'<option value="'+v+'">'+l+'</option>').join('')+'</select></div>').join('')}
+function gradeQ(box,items,res,key){let rows=[...$(box).querySelectorAll('.rowq')],ok=0,done=0,r=$(res);rows.forEach((x,i)=>{let v=x.querySelector('select').value;if(v)done++;if(v===items[i][1])ok++});
+if(done<items.length){rows.forEach(x=>x.style.borderColor='');r.className='feedback';r.textContent='เลือกให้ครบก่อนนะ ('+done+'/'+items.length+')';return}
+rows.forEach((x,i)=>x.style.borderColor=x.querySelector('select').value===items[i][1]?'var(--mint)':'var(--coral)');
+if(ok===items.length){let g=addCoins(key,15);r.className='feedback good';r.textContent='🎉 ถูกทั้งหมด '+ok+'/'+items.length+(g?' • +'+g+' 🪙':' (รับเหรียญด่านนี้แล้ว)')}else{r.className='feedback bad';r.textContent='ถูก '+ok+'/'+items.length+' ข้อ — แก้ข้อที่กรอบสีแดงแล้วลองใหม่'}}
+$('sortCheck').addEventListener('click',()=>gradeQ('sortList',sortItems,'sortRes','sort'));$('facCheck').addEventListener('click',()=>gradeQ('facList',facItems,'facRes','fac'));
+function initNew(){buildQ('sortList',sortItems,sortOpts);buildQ('facList',facItems,facOpts);['sortRes','facRes','missionRes'].forEach(id=>{$(id).textContent='';$(id).className='feedback'});vi=0;vcShow();mission()}
+$('reset').addEventListener('click',initNew);initNew();
+const spyIds=['home','learn','budget','value','produce','quiz','summary'];
+function spyNav(){let cur='home';spyIds.forEach(id=>{let el=$(id);if(el&&el.getBoundingClientRect().top<=160)cur=id});if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)cur='summary';
+document.querySelectorAll('.nav').forEach(a=>{let on=a.getAttribute('href')==='#'+cur;a.classList.toggle('active',on);on?a.setAttribute('aria-current','true'):a.removeAttribute('aria-current')})}
+addEventListener('scroll',spyNav,{passive:true});
+updateBudget();updateValue();spyNav();
+</script>
+</body></html>
